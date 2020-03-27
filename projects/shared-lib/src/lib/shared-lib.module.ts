@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { getSpanishPaginatorIntl } from './spanish-paginator-intl';
 
 // Custom components
 
@@ -14,6 +15,8 @@ import { SelectTriggerLabelComponent } from './components/controls/select-trigge
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { FormDialogComponent } from './components/dialogs/form-dialog/form-dialog.component';
 import { DataTableComponent } from './components/tables/data-table/data-table.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SocialPopoverComponent } from './components/controls/social-popover/social-popover.component';
 
 // Material components
 
@@ -24,7 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -42,7 +45,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     KeywordControlComponent,
     ProgressBarComponent,
     ProgressSpinnerComponent,
-    SelectTriggerLabelComponent
+    SelectTriggerLabelComponent,
+    SocialPopoverComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
@@ -55,7 +59,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     KeywordControlComponent,
     ProgressBarComponent,
     ProgressSpinnerComponent,
-    SelectTriggerLabelComponent
+    SelectTriggerLabelComponent,
+    SocialPopoverComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +80,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatTableModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useValue: getSpanishPaginatorIntl()
+    }
   ]
 })
 export class SharedLibModule {

@@ -1,0 +1,167 @@
+<form autocomplete="off" [formGroup]="mainForm">
+  <input formControlName="id" type="hidden" />
+
+
+  <!--Title-->
+  <mat-form-field>
+    <input formControlName="title" matInput maxlength="40" placeholder="Título del Video *" />
+    <mat-error>
+      Este campo es obligatorio
+    </mat-error>
+  </mat-form-field>
+
+  <!--Id/Enlae Radio && Id/Enlace text-->
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" >
+    <div fxFlex="48%">
+      <mat-radio-group aria-label="Seleccione un Dato" formControlName="idLinkR">
+        <mat-radio-button  style="margin-right: 15px;" value="id">ID Youtube  </mat-radio-button>
+        <mat-radio-button value="link">Enlace </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div fxFlex="48%">
+      <mat-form-field *ngIf="mainForm.get('idLinkR').value == 'id'">
+        <input formControlName="idYoutube" matInput maxlength="40" placeholder="https://www.youtube.com/watch?v= *" />
+        <mat-error>
+          <ng-container *ngIf="idYoutubeCtrl.hasError('required')">Este campo es obligatorio</ng-container>
+          <ng-container *ngIf="idYoutubeCtrl.hasError('pattern')">No es un ID válido </ng-container>
+
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="mainForm.get('idLinkR').value == 'link'">
+        <input formControlName="link" matInput maxlength="40" placeholder="Enlace *" />
+        <mat-error>
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <!--Description-->
+  <mat-form-field>
+    <input formControlName="description" matInput maxlength="100" placeholder="Descripción" />
+    <mat-error>
+      Este campo es obligatorio
+    </mat-error>
+  </mat-form-field>
+  <!--Keywords--><!-- Orden -->
+  <shared-keyword-control formControlName="keywords"></shared-keyword-control>
+  <!--
+  <mat-form-field class="chip-list">
+    <mat-chip-list #chipList aria-label="Búsqueda">
+      <mat-chip *ngFor="let item of keywords"  [removable]="true" (removed)="removeKeyword(item)">
+        {{ item }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Palabras clave"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="addKeyword($event)">
+    </mat-chip-list>
+  </mat-form-field>|
+-->
+  <!-- Date --><!-- Orden -->
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" >
+    <div fxFlex="48%">
+        <mat-form-field>
+          <input formControlName="date" [matDatepicker]="dateField" matInput placeholder="Fecha *" readonly>
+          <mat-datepicker-toggle matSuffix [for]="dateField"></mat-datepicker-toggle>
+          <mat-datepicker #dateField></mat-datepicker>
+          <mat-error>
+            Este campo es obligatorio
+          </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxFlex="48%">
+      <mat-form-field>
+         <input type="number" formControlName="order" matInput placeholder="Orden *" />
+         <mat-error>
+           <ng-container *ngIf="orderCtrl.hasError('required')">Este campo es obligatorio</ng-container>
+           <ng-container *ngIf="orderCtrl.hasError('pattern') && !orderCtrl.hasError('max') && !orderCtrl.hasError('min')">Valor numérico inválido</ng-container>
+           <ng-container *ngIf="orderCtrl.hasError('max')">Valor númerico debe ser menor o igual a 1,000,000</ng-container>
+           <ng-container *ngIf="orderCtrl.hasError('min')">Valor numérico debe ser mayor a 0 </ng-container>
+         </mat-error>
+       </mat-form-field>
+    </div>
+  </div>
+
+  <!--video/image Radio && image uploader-->
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" >
+      <div fxFlex="48%">
+        <mat-radio-group aria-label="Seleccione un Dato" formControlName="imageVideoR">
+          <mat-radio-button  style="margin-right: 15px;" value="video">Video Portada  </mat-radio-button>
+          <mat-radio-button value="image">Imagen Portada </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div fxFlex="48%" >
+          <div [style.margin-bottom]="'2em'">
+              <!--<shared-image-upload-control label="Seleccionar Imagen" [file]="image" (fileChange)="image = $event"></shared-image-upload-control>-->
+              <shared-image-upload-control #image  formControlName="image" *ngIf="mainForm.get('imageVideoR').value == 'image'"></shared-image-upload-control>
+          </div>
+
+      </div>
+    </div>
+
+
+
+
+<!--
+  <mat-form-field>
+      <input formControlName="email" matInput maxlength="100" placeholder="Email*" type="text">
+      <mat-error>
+        <ng-container *ngIf="mainForm.get('email').hasError('required')">Este campo es obligatorio</ng-container>
+        <ng-container *ngIf="emailCtrl.hasError('email')">Correo Invalido </ng-container>
+
+      </mat-error>
+    </mat-form-field>
+  <mat-form-field>
+      <input formControlName="rfc" matInput maxlength="100" placeholder="RFC*" type="text">
+      <mat-error>
+        <ng-container *ngIf="rfcCtrl.hasError('required')">Este campo es obligatorio</ng-container>
+        <ng-container *ngIf="rfcCtrl.hasError('pattern')">Patron Invalido </ng-container>
+
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input formControlName="date" [matDatepicker]="dateField" matInput placeholder="Fecha*" readonly>
+      <mat-datepicker-toggle matSuffix [for]="dateField"></mat-datepicker-toggle>
+      <mat-datepicker #dateField></mat-datepicker>
+      <mat-error>
+        Este campo es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="gender" placeholder="Género">
+          <mat-option value="female">Femenino</mat-option>
+          <mat-option value="male">Masculino</mat-option>
+
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="country" placeholder="País*">
+          <mat-option *ngFor="let cntry of countries" [value]="cntry.value">{{cntry.label}}</mat-option>
+        </mat-select>
+        <mat-error>
+          Este campo es obligatorio.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select formControlName="state" placeholder="Estado*">
+          <mat-option *ngFor="let stt of countryCtrl.value" [value]="stt.value">{{stt.label}}</mat-option>
+        </mat-select>
+        <mat-error>
+          Este campo es obligatorio.
+        </mat-error>
+    </mat-form-field>
+
+
+
+    <shared-image-upload-control #image formControlName="image"></shared-image-upload-control>
+  -->
+</form>
+

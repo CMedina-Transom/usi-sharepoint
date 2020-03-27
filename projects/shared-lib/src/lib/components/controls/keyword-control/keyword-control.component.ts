@@ -25,7 +25,7 @@ export class KeywordControlComponent implements ControlValueAccessor, OnDestroy,
   disabled: boolean;
   keywordGroup: FormGroup;
   @Input() keywords: string[] = [];
-  @Input() placeholder = 'Palabras clave';
+  @Input() placeholder = 'Palabras Clave';
   readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
   subscriptions: Subscription[] = [];
 

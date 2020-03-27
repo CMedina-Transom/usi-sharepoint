@@ -1,0 +1,140 @@
+<div style="background-color:#e6e6e6;">
+  <div class="container" style="justify-content: center;">
+      <div class="row" style="justify-content: center; width: fit-content; height: 552px;">
+          <!-- <div class="offset-xl-3 col-xl-6" *ngFor="let style of hola">
+              <p>{{style.Description}}</p>
+          </div>  -->
+
+          <div *ngIf="mostrarTodos" class="view-more">
+            <a href="http://pruebasp.slp.gob.mx/SitePages/Web%20Parts/showAllMainVideos.aspx" class="ui-view-all-tramites" target="_blank" style="z-index: 99999999999;">
+              <i class="material-icons" aria-hidden="true" style="color: #12963F;vertical-align: bottom;">search</i>Ver todos
+            </a>
+          </div>
+
+          <ngb-carousel #carousel *ngIf="videoList"  style=" height: 552px;" >
+            <ng-template ngbSlide *ngFor="let item of videoList; let i = index" style=" height: 552px;">
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" style="/* flex-direction: row; *//* box-sizing: border-box; *//* display: flex; *//* place-content: stretch space-evenly; *//* align-items: stretch; *//* max-height: 100%; */display: flex;width: 100%;justify-content: space-between; height: 552px;">
+
+                <div fxFlex="50%" *ngIf="item.video1.exist" >
+                  <div class="card" *ngIf="item.video1.exist"  style=" align-items: center; margin:50px 20px; padding: 0;">
+                    <div class="card-body" >
+                        <div class=" text-center">
+                          <div class="contenedorVideo">
+                            <button class="botonVideo" (click)="openDialog(item.video1.link)" type="button">
+                              <iframe width="100%" height="100%" style="object-fit: contain;" [src]="item.video1.link | safe" frameborder="0" allowfullscreen *ngIf="!item.video1.hasImage"></iframe>
+                              <img style="width: 100%; height: 100%; object-fit: contain" [src]="item.video1.image" *ngIf="item.video1.hasImage"/>
+                            </button>
+                          </div>
+
+
+                          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" >
+                            <div fxFlex="80%">
+                              <p class="mt-1" style="font-family: 'Montserrat';font-weight: 600;  font-size: 12px;  text-align: left;">{{item.video1.title}}</p>
+                            </div>
+                            <div fxFlex="20%">
+                              <p style="font-family: 'Montserrat';font-weight: 400;  font-size: 12px;  text-align: left;"><i style="color: #009a3e; vertical-align: bottom; font-size:20px;"class="material-icons icon-new">date_range</i>{{item.video1.date | date: 'dd/MM/yyyy'}} </p>
+                            </div>
+                          </div>
+                          <p class="mb-4" style="font-family: 'Montserrat';font-weight: 400;  font-size: 12px;  text-align: justify;">{{item.video1.description}}</p>
+                          <div class="ui-share-new" >
+                            <div class="ui-share-link" style="font-family: 'Montserrat';font-weight: 600;  font-size: 12px; ">
+                              <shared-social-popover
+                                mensajeAsunto="{{ item.video1.link }}"
+                                mensajeContenido="Video desde el sitio del gobierno de SLP: &gt;a href=&quot;{{ item.video1.link }}&quot;&lt;{{ item.video1.title }}&lt;/a&gt;."
+                                url="{{ item.video1.link }}">
+                              </shared-social-popover>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
+                <div fxFlex="50%" *ngIf="item.video2.exist" >
+                  <div class="card" *ngIf="item.video2.exist"  style=" align-items: center; margin:50px 20px; padding: 0;">
+                    <div class="card-body" >
+                        <div class=" text-center">
+                          <div class="contenedorVideo">
+                            <button class="botonVideo" (click)="openDialog(item.video2.link)" type="button">
+                              <iframe width="100%" height="100%" style="object-fit: contain;" [src]="item.video2.link | safe" frameborder="0" allowfullscreen *ngIf="!item.video2.hasImage"></iframe>
+                              <img style="width: 100%; height: 100%; object-fit: contain" [src]="item.video2.image" *ngIf="item.video2.hasImage"/>
+                            </button>
+                          </div>
+
+
+                          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly stretch" >
+                            <div fxFlex="80%">
+                              <p class="mt-1" style="font-family: 'Montserrat';font-weight: 600;  font-size: 12px;  text-align: left;">{{item.video2.title}}</p>
+                            </div>
+                            <div fxFlex="20%">
+                              <p style="font-family: 'Montserrat';font-weight: 400;  font-size: 12px;  text-align: left;"><i style="color: #009a3e; vertical-align: bottom; font-size:20px;"class="material-icons icon-new">date_range</i>{{item.video2.date | date: 'dd/MM/yyyy'}} </p>
+                            </div>
+                          </div>
+                          <p class="mb-4" style="font-family: 'Montserrat';font-weight: 400;  font-size: 12px;  text-align: justify;">{{item.video2.description}}</p>
+                          <div class="ui-share-new" >
+                            <div class="ui-share-link" style="font-family: 'Montserrat';font-weight: 600;  font-size: 12px; ">
+                              <shared-social-popover
+                                mensajeAsunto="{{ item.video2.link }}"
+                                mensajeContenido="Video desde el sitio del gobierno de SLP: &gt;a href=&quot;{{ item.video2.link }}&quot;&lt;{{ item.video2.title }}&lt;/a&gt;."
+                                url="{{ item.video2.link }}">
+                            </shared-social-popover>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+            </ng-template>
+
+          </ngb-carousel>
+
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--La siguiente linea copiarla en el index-->
+<!-- <mvswp-root style=" display: flex;  flex-wrap: wrap;  margin: auto;  justify-content: start;"></mvswp-root> -->
+<!--De aqui empieza para el de todos los videos-->
+<!-- <div class="items-videos" *ngFor="let item of videoList; let i = index">
+  <div fxLayout="row">
+    <div class="col-custom-videos">
+      <div class="card" style="width: 300px; margin:30px 10px;">
+        <div class="contenedorVideo">
+          <button class="btnVideo" (click)="openDialog(item.Enlace)" type="button" style="width:100%; height: 200px; padding:0; border:initial; margin: 0;">
+            <iframe width="100%" height="100%" style="object-fit: contain;" [src]="item.Enlace | safe" frameborder="0" allowfullscreen *ngIf="!item.TieneImagen"></iframe>
+            <img style="width: 100%; height: 100%; object-fit: contain" [src]="item.Imagen" *ngIf="item.TieneImagen"/>
+          </button>
+        </div>
+        <div class="card-body" style="height: 160px;">
+            <div class="text-left">
+              <span style="font-family: 'Montserrat'; font-weight: 400;  font-size: 12px; float: right; margin-left: 5px;"><i style="color: #009a3e; vertical-align: bottom; font-size:20px;"class="material-icons icon-new">date_range</i> {{item.Fecha | date: 'dd/MM/yyyy'}} </span>
+              <h6>{{item.Title}}</h6>
+              <p class="mb-4" style="font-family: 'Montserrat';font-weight: 400;  font-size: 12px;  text-align: justify;">{{item.Descripcion}}</p>
+              <div class="ui-share-new" >
+                <div class="ui-share-link" style="font-family: 'Montserrat';font-weight: 600;  font-size: 12px; ">
+                  <div class="text-center">
+                    <shared-social-popover
+                    mensajeAsunto="{{ item.Enlace }}"
+                    mensajeContenido="Video desde el sitio del gobierno de SLP: &gt;a href=&quot;{{ item.Enlace }}&quot;&lt;{{ item.Title }}&lt;/a&gt;."
+                    url="{{ item.Enlace }}">
+                  </shared-social-popover>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div> -->

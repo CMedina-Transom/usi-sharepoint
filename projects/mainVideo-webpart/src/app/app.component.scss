@@ -1,0 +1,43 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+ .title {
+  font-family: 'Montserrat-Semibold';  font-size: 12px;  text-align: left;
+ }
+ .date{
+  font-family: 'Montserrat';
+  font-size: 12px;
+  text-align: right;
+ }
+ .description{
+  font-family: 'Montserrat';
+  font-size: 12px;
+  text-align: justify;
+ }
+ .share{
+  font-family: 'Montserrat';
+  font-size: 12px;
+  text-align: center;
+  color: "#009A3E";
+ }
+ .botonVideo{
+  width: 530px;
+  height: 300px;
+ }
+ .botonVideo:after{
+  display:block;
+  top:0;
+  content:"";
+  position:absolute;
+  background: rgba(0, 0, 0, 0.72);
+  width: 530px;
+  height: 300px;
+  cursor: pointer;
+  left: 0;
+  right: 0;
+ }
+ .contenedorVideo{
+   position: relative;
+ }
+
+
+
+
